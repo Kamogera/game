@@ -1,0 +1,226 @@
+import turtle
+from random import randint
+import time
+
+wn = turtle.Screen()
+wn.title("Turtle Race!")
+wn.bgcolor("black")
+tess = turtle.Turtle()
+tess.speed(-1)
+tess.hideturtle()
+tess.penup()
+
+tess.fillcolor("blue")
+tess.goto(-800, -1100)
+tess.begin_fill()
+for box in range (2):
+	tess.forward(795)
+	tess.right(90)
+	tess.forward(295)
+	tess.right(90)
+tess.end_fill()
+
+tess.fillcolor("red")
+tess.goto(5, -1100)
+tess.begin_fill()
+for box in range (2):
+	tess.forward(795)
+	tess.right(90)
+	tess.forward(295)
+	tess.right(90)
+tess.end_fill()
+
+tess.fillcolor("lightgreen")
+tess.goto(-800, -450)
+tess.begin_fill()
+for box in range (2):
+	tess.forward(1600)
+	tess.right(90)
+	tess.forward(645)
+	tess.right(90)
+tess.end_fill()
+
+tess.color("white")
+tess.goto(0, 1100)
+tess.write("TURTLES RACE",  align = "center", font=("Arial", 22, "bold"))
+tess.goto(-390, -1330)
+tess.write("PLAY",  align = "center", font=("Arial", 18))
+tess.goto(390, -1330)
+tess.write("STOP", align = "center", font=("Arial", 18))
+tess.goto(0, -1050)
+tess.write("Round", align = "center", font=("Arial", 18))
+i_pos = -600
+for i in range (1, 6):
+	tess.goto(i_pos, -900)
+	tess.write(i, align = "center", font=("Arial", 14))
+	i_pos = i_pos + 300
+
+def play(x, y):
+	if int(x) > 0 and int(y) < -1000:
+			turtle.bye()
+	if int(x) < 0 and int(y) < -1000:
+			race()
+
+t_color = ["blue", "red", "green", "yellow", "purple", "white", "grey"]
+
+tom = turtle.Turtle()
+tom.hideturtle()
+tom.speed(-1)
+tom.penup()
+pos = -400
+tom.goto(pos, 1000)
+
+c = -1
+for step in range (9):
+	if c > 5:
+		c = 0
+	else:
+		c = c + 1
+	tom.color(t_color[c])	
+	tom.write(step, align="center")
+	tom.setheading(270)
+	tom.forward(50)
+	for i in range (7):
+		tom.pendown()
+		tom.width(5)
+		tom.forward(150)
+		tom.penup()
+		tom.forward(50)
+	tom.penup()
+	pos = pos + 100
+	tom.goto(pos, 1000)
+
+t_pos = 880
+tom_b = turtle.Turtle()
+tom_r = turtle.Turtle()
+tom_g = turtle.Turtle()
+tom_y = turtle.Turtle()
+tom_p = turtle.Turtle()
+tom_w = turtle.Turtle()
+tom_k = turtle.Turtle()
+
+tom_clone = turtle.Turtle() 
+tom_clone.hideturtle()
+# global clone_pos
+clone_pos = -600
+
+list = [tom_b, tom_r, tom_g, tom_y, tom_p, tom_w, tom_k] 
+
+for i in range (7):
+    list[i].shape("turtle")
+    list[i].color(t_color[i])
+    list[i].turtlesize(10)
+    list[i].speed(7)
+    list[i].penup()
+    list[i].goto(-550, t_pos)
+    list[i].left(360)
+    list[i].turtlesize(7)
+    list[i].pendown()
+    list[i].speed(0)
+    t_pos = t_pos - 200
+
+def race():
+	t_pos = 880
+	for i in range (7):
+		list[i].clear()
+		list[i].shape("turtle")
+		list[i].color(t_color[i])
+		list[i].turtlesize(10)
+		list[i].speed(6)
+		list[i].penup()
+		list[i].goto(-550, t_pos)
+		list[i].left(360)
+		list[i].turtlesize(7)
+		list[i].pendown()
+		list[i].speed(0)
+		t_pos = t_pos - 200
+	t1 = turtle.Turtle()
+	t1.penup()
+	t1.color("white")
+	t1.hideturtle()
+	t1.goto(-50, -50)
+	t1.write("1!", move=False, align="center", font=("Arial", 56, "normal"))
+	time.sleep(0.5)
+	t1.clear()
+	t1.write("2!", move=False, align="center", font=("Arial", 56, "normal"))
+	time.sleep(0.5)
+	t1.clear()
+	t1.write("3!", move=False, align="center", font=("Arial", 56, "normal"))
+	time.sleep(0.5)
+	t1.clear()
+	t1.write("Go!", move=False, align="center", font=("Arial", 56, "normal"))
+	time.sleep(0.5)
+	t1.clear()
+	
+	
+	for step in  range (20):
+		for i in range (7):
+			list[i].left(20)
+			list[i].right(40)
+			list[i].left(20)
+			list[i].forward(randint(1, 80))
+
+	
+
+	b_xpos = tom_b.xcor()
+	r_xpos = tom_r.xcor()
+	g_xpos = tom_g.xcor()
+	y_xpos = tom_y.xcor()
+	p_xpos = tom_p.xcor()
+	w_xpos = tom_w.xcor()
+	k_xpos = tom_k.xcor()
+			
+	xpos_list = [b_xpos, r_xpos, g_xpos, y_xpos, p_xpos, w_xpos, k_xpos]
+	
+	max = 0
+	max_index = 0
+
+	for i in range (7):
+		if xpos_list[i] > max:
+			max = xpos_list[i]
+			max_index = i
+	
+	if max_index == 0:
+		winner = tom_b
+	elif max_index == 1:
+		winner = tom_r
+	elif max_index == 2:
+		winner = tom_g
+	elif max_index == 3:
+		winner = tom_y
+	elif max_index == 4:
+		winner = tom_p
+	elif max_index == 5:
+		winner = tom_w
+	else:
+		winner = tom_k
+	
+	winner.turtlesize(16)
+	
+	global clone_pos
+	
+	if clone_pos == 900:
+		global tom_clone
+		pos = -600
+		for i in range (6):
+			tom_clone.color("lightgreen")
+			tom_clone.setheading(90)
+			tom_clone.goto(pos, -700)
+			tom_clone.turtlesize(10)
+			tom_clone.stamp()
+			pos = pos + 300
+		clone_pos = -600
+	
+	tom_clone = winner.clone()
+	tom_clone.penup()
+	tom_clone.turtlesize(10)
+	tom_clone.setheading(90)
+	tom_clone.goto(clone_pos, -700)
+	tom_clone.stamp()
+	clone_pos = clone_pos + 300
+
+wn.onscreenclick(race())
+race()
+
+wn.onclick(play)
+wn.mainloop()
